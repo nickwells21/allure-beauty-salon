@@ -587,6 +587,7 @@ h4, h5, h6 {
 }
 
 .hero__inner {
+  max-width: 680px;
   background: rgba(6, 6, 6, 0.72);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
