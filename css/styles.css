@@ -555,7 +555,15 @@ h4, h5, h6 {
 }
 
 .hero__inner {
-  max-width: 900px;
+  max-width: 680px;
+  background: rgba(6, 6, 6, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-left: 3px solid var(--brand-brown);
+  border-radius: 2px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  position: relative;
+  z-index: 3;
 }
 
 .hero__headline {
@@ -2479,7 +2487,7 @@ h4, h5, h6 {
 .testimonial-card,
 .cta-banner,
 .step,
-.photo-gallery__item,
+.photo-carousel,
 .amenity-item,
 .who-its-for__content,
 .who-its-for__image,
@@ -2507,46 +2515,103 @@ h4, h5, h6 {
   z-index: 2;
 }
 
-/* === PHOTO GALLERY STRIP === */
-.photo-gallery {
-  padding-block: 0;
+/* === PHOTO CAROUSEL === */
+.photo-carousel {
+  position: relative;
   overflow: hidden;
+  width: 100%;
+  background: #0a0a0a;
+  z-index: 2;
 }
 
-.photo-gallery__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  max-height: 520px;
+.photo-carousel__track {
+  display: flex;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
-.photo-gallery__item {
+.photo-carousel__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 600px;
   overflow: hidden;
   position: relative;
 }
 
-.photo-gallery__img {
+.photo-carousel__img {
   width: 100%;
-  height: 520px;
+  height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   display: block;
-  transition: transform 0.6s ease;
 }
 
-.photo-gallery__item:hover .photo-gallery__img {
-  transform: scale(1.04);
+/* Prev / Next arrow buttons */
+.photo-carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--color-text-primary);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background var(--transition-base), border-color var(--transition-base);
+}
+
+.photo-carousel__btn:hover {
+  background: rgba(10, 10, 10, 0.85);
+  border-color: var(--color-accent);
+}
+
+.photo-carousel__btn--prev { left: 1.25rem; }
+.photo-carousel__btn--next { right: 1.25rem; }
+
+/* Dot indicators */
+.photo-carousel__dots {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.photo-carousel__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.photo-carousel__dot.is-active {
+  background: var(--color-accent);
+  transform: scale(1.35);
+}
+
+.photo-carousel__dot:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 @media (max-width: 768px) {
-  .photo-gallery__grid {
-    grid-template-columns: 1fr;
-    max-height: none;
+  .photo-carousel__slide {
+    height: 380px;
   }
 
-  .photo-gallery__img {
-    height: 340px;
-    object-position: center;
+  .photo-carousel__btn {
+    width: 38px;
+    height: 38px;
   }
 }
 

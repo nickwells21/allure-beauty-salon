@@ -239,29 +239,46 @@
       </div>
     </section>
 
-    <!-- Photo Gallery Strip -->
-    <section class="photo-gallery" aria-label="Inside Allure Beauty Salon">
-      <div class="photo-gallery__grid">
-        <div class="photo-gallery__item">
-          <img
-            src="/images/salon-portrait-2.jpg"
-            alt="Allure Beauty Salon styling station with mirror and chair"
-            class="photo-gallery__img"
-            loading="lazy"
-            width="750"
-            height="1000"
-          />
+    <!-- Photo Carousel -->
+    <section class="photo-carousel" aria-label="Inside Allure Beauty Salon" aria-roledescription="carousel" id="photo-carousel">
+      <div class="photo-carousel__track" id="carousel-track">
+
+        <div class="photo-carousel__slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+          <img src="/images/salon-portrait-2.jpg" alt="Allure Beauty Salon styling station with mirror and chair" class="photo-carousel__img" loading="eager" />
         </div>
-        <div class="photo-gallery__item">
-          <img
-            src="/images/salon-portrait-1.jpg"
-            alt="Allure Beauty Salon professional product display"
-            class="photo-gallery__img"
-            loading="lazy"
-            width="750"
-            height="1000"
-          />
+
+        <div class="photo-carousel__slide" role="group" aria-roledescription="slide" aria-label="2 of 4" aria-hidden="true">
+          <img src="/images/salon-interior.jpg" alt="Allure Beauty Salon welcoming waiting area with warm lighting" class="photo-carousel__img" loading="lazy" />
         </div>
+
+        <div class="photo-carousel__slide" role="group" aria-roledescription="slide" aria-label="3 of 4" aria-hidden="true">
+          <img src="/images/salon-portrait-1.jpg" alt="Allure Beauty Salon professional product display shelves" class="photo-carousel__img" loading="lazy" />
+        </div>
+
+        <div class="photo-carousel__slide" role="group" aria-roledescription="slide" aria-label="4 of 4" aria-hidden="true">
+          <img src="/images/salon-hero.jpg" alt="Allure Beauty Salon reception and front entrance" class="photo-carousel__img" loading="lazy" />
+        </div>
+
+      </div>
+
+      <!-- Prev / Next arrows -->
+      <button class="photo-carousel__btn photo-carousel__btn--prev" id="carousel-prev" aria-label="Previous photo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="photo-carousel__btn photo-carousel__btn--next" id="carousel-next" aria-label="Next photo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Dot indicators -->
+      <div class="photo-carousel__dots" role="tablist" aria-label="Select a photo">
+        <button class="photo-carousel__dot is-active" role="tab" aria-selected="true"  aria-label="Photo 1" data-slide="0"></button>
+        <button class="photo-carousel__dot"            role="tab" aria-selected="false" aria-label="Photo 2" data-slide="1"></button>
+        <button class="photo-carousel__dot"            role="tab" aria-selected="false" aria-label="Photo 3" data-slide="2"></button>
+        <button class="photo-carousel__dot"            role="tab" aria-selected="false" aria-label="Photo 4" data-slide="3"></button>
       </div>
     </section>
 

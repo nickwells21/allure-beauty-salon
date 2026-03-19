@@ -770,6 +770,95 @@ function initContactForm() {
 }
 
 /* ============================================================
+   PHOTO CAROUSEL
+   ============================================================ */
+
+function initPhotoCarousel() {
+  const carousel = document.getElementById('photo-carousel');
+  if (!carousel) return;
+
+  const track   = document.getElementById('carousel-track');
+  const slides  = track ? track.querySelectorAll('.photo-carousel__slide') : [];
+  const dots    = carousel.querySelectorAll('.photo-carousel__dot');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  if (!track || !slides.length) return;
+
+  const total = slides.length;
+  let current  = 0;
+  let autoTimer = null;
+  const INTERVAL = 4500;
+
+  function goTo(index) {
+    current = (index + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+
+    slides.forEach(function(slide, i) {
+      slide.setAttribute('aria-hidden', i !== current ? 'true' : 'false');
+    });
+
+    dots.forEach(function(dot, i) {
+      const active = i === current;
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(function() { goTo(current + 1); }, INTERVAL);
+  }
+
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function() { goTo(current - 1); startAuto(); });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function() { goTo(current + 1); startAuto(); });
+  }
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      goTo(parseInt(dot.dataset.slide, 10));
+      startAuto();
+    });
+  });
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+
+  // Touch swipe
+  var touchStartX = 0;
+  track.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      dx < 0 ? goTo(current + 1) : goTo(current - 1);
+      startAuto();
+    }
+  }, { passive: true });
+
+  // Keyboard navigation when carousel is focused
+  carousel.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft')  { goTo(current - 1); startAuto(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); startAuto(); }
+  });
+
+  // Init (no auto-advance for reduced-motion users)
+  goTo(0);
+  if (!prefersReducedMotion()) {
+    startAuto();
+  }
+}
+
+/* ============================================================
    UTILITY — HTML ESCAPE
    ============================================================ */
 
@@ -792,6 +881,7 @@ function init() {
   initCharCounter();
   initContactForm();
   initParallax();
+  initPhotoCarousel();
 }
 
 if (document.readyState === 'loading') {
