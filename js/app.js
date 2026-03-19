@@ -783,10 +783,7 @@ function initInquiryModal() {
   const successEl = document.getElementById('inquiry-success');
   const submitBtn = document.getElementById('inquiry-submit');
 
-  const triggers = [
-    document.getElementById('nav-inquiry-trigger'),
-    document.getElementById('mobile-inquiry-trigger'),
-  ].filter(Boolean);
+  const triggers = Array.from(document.querySelectorAll('.js-inquiry-trigger'));
 
   function openModal() {
     modal.classList.add('is-open');
