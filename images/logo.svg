@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 285" role="img" aria-label="Allure — Be Your Own Kind of Beautiful">
+  <defs>
+    <!-- Right arc path: from upper-right (1 o'clock), CW to lower-right (4 o'clock) — for BE YOUR OWN -->
+    <path id="arc-be-your-own"  d="M 168,48 A 95,95 0 0,1 205,178"/>
+    <!-- Bottom arc path: from lower-left (7 o'clock), CW to lower-right (5 o'clock) — for KIND OF BEAUTIFUL -->
+    <path id="arc-kind-of-beautiful" d="M 72,212 A 95,95 0 0,1 168,212"/>
+    <!-- Full main arc for the circle stroke: right-break CW around to left-break -->
+    <path id="main-arc" d="M 168,48 A 95,95 0 1,1 72,48"/>
+  </defs>
+
+  <!-- Main circle arc — two breaks near top (badge style) -->
+  <path d="M 168,48 A 95,95 0 1,1 72,48"
+        stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+
+  <!-- BE YOUR OWN — right arc, clockwise from 1 o'clock to 4 o'clock -->
+  <text font-family="'Space Mono', 'Courier New', monospace"
+        font-size="11" font-weight="700" letter-spacing="3.5"
+        fill="currentColor">
+    <textPath href="#arc-be-your-own" startOffset="8%">BE YOUR OWN</textPath>
+  </text>
+
+  <!-- KIND OF BEAUTIFUL — bottom arc, clockwise from 7 o'clock to 5 o'clock -->
+  <text font-family="'Space Mono', 'Courier New', monospace"
+        font-size="11" font-weight="700" letter-spacing="2.5"
+        fill="currentColor">
+    <textPath href="#arc-kind-of-beautiful" startOffset="4%">KIND OF BEAUTIFUL</textPath>
+  </text>
+
+  <!-- Allure script — large flowing cursive, vertically centered through the circle -->
+  <text x="122" y="185"
+        font-family="'Playfair Display', 'Georgia', serif"
+        font-size="82" font-weight="400" font-style="italic"
+        text-anchor="middle"
+        fill="currentColor"
+        transform="rotate(-8, 122, 165)">Allure</text>
+</svg>

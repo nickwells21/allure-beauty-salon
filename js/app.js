@@ -7,8 +7,12 @@
  *  - Mobile hamburger menu toggle
  *  - FAQ accordion (keyboard accessible, aria-expanded)
  *  - Multi-step application form (stepper, validation, submit)
+ *  - Specialty checkbox group validation
+ *  - Step progress scroll
+ *  - Character counter for booth-rental-goals textarea
+ *  - Phone number auto-formatter
  *  - Honeypot anti-spam
- *  - Contact form submit
+ *  - Contact form submit (with success state)
  *  - Parallax (desktop ≥ 1024px + no reduced-motion only)
  */
 
@@ -297,7 +301,7 @@ function initApplicationForm() {
   const TOTAL_STEPS = panels.length;
   let currentStep = 0; // 0-indexed
 
-  const stepLabels = ['About You', 'Your Practice', 'Final Details'];
+  const stepLabels = ['Your Background', 'Your Business', 'Your Story'];
 
   /**
    * Show a given step panel and update stepper UI.
@@ -360,17 +364,21 @@ function initApplicationForm() {
       }
 
       if (type === 'email' && !isValidEmail(value)) {
-        errors.push({ field, message: 'Please enter a valid email address.' });
+        errors.push({ field, message: 'Please enter a valid email address (e.g., name@example.com)' });
         return;
       }
 
       if (type === 'tel' && value && !isValidPhone(value)) {
-        errors.push({ field, message: 'Please enter a valid phone number or leave blank.' });
+        errors.push({ field, message: 'Please enter a 10-digit phone number.' });
         return;
       }
 
       if (field.tagName === 'TEXTAREA' && field.minLength > 0 && value.length < field.minLength) {
-        errors.push({ field, message: `Please enter at least ${field.minLength} characters.` });
+        if (field.id === 'why_booth_rental') {
+          errors.push({ field, message: 'Please write at least 50 characters about your booth rental goals.' });
+        } else {
+          errors.push({ field, message: `Please enter at least ${field.minLength} characters.` });
+        }
         return;
       }
 
@@ -388,6 +396,29 @@ function initApplicationForm() {
         const firstRadio = radios[0];
         if (firstRadio) {
           errors.push({ field: firstRadio, message: 'Please select an option.' });
+        }
+      }
+    });
+
+    // Required checkbox groups (fieldsets with data-required-checkboxes)
+    panel.querySelectorAll('fieldset[data-required-checkboxes]').forEach((fieldset) => {
+      const checkboxes = fieldset.querySelectorAll('input[type="checkbox"]');
+      const anyChecked = Array.from(checkboxes).some((c) => c.checked);
+      if (!anyChecked) {
+        const errorEl = fieldset.querySelector('.field-error');
+        if (errorEl) {
+          errorEl.textContent = 'Please select at least one specialty.';
+          errorEl.style.display = 'block';
+        }
+        const firstCheckbox = checkboxes[0];
+        if (firstCheckbox) {
+          errors.push({ field: firstCheckbox, message: 'Please select at least one specialty.' });
+        }
+      } else {
+        const errorEl = fieldset.querySelector('.field-error');
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.style.display = 'none';
         }
       }
     });
@@ -455,11 +486,15 @@ function initApplicationForm() {
         if (!value && field.type !== 'checkbox') {
           showFieldError(field, 'This field is required.');
         } else if (type === 'email' && !isValidEmail(value)) {
-          showFieldError(field, 'Please enter a valid email address.');
+          showFieldError(field, 'Please enter a valid email address (e.g., name@example.com)');
         } else if (type === 'tel' && value && !isValidPhone(value)) {
-          showFieldError(field, 'Please enter a valid phone number or leave blank.');
+          showFieldError(field, 'Please enter a 10-digit phone number.');
         } else if (field.tagName === 'TEXTAREA' && field.minLength > 0 && value.length < field.minLength) {
-          showFieldError(field, `Please enter at least ${field.minLength} characters.`);
+          if (field.id === 'why_booth_rental') {
+            showFieldError(field, 'Please write at least 50 characters about your booth rental goals.');
+          } else {
+            showFieldError(field, `Please enter at least ${field.minLength} characters.`);
+          }
         } else if (type === 'checkbox' && !field.checked) {
           showFieldError(field, 'You must check this box to continue.');
         } else {
@@ -556,7 +591,7 @@ function initApplicationForm() {
       // Update body text with first name
       const bodyEl = successState.querySelector('.form-success__body');
       if (bodyEl) {
-        bodyEl.innerHTML = `Thank you, <strong>${escapeHtml(firstName)}</strong>. We'll review your application and reach out within 1–2 business days to discuss availability and next steps.`;
+        bodyEl.innerHTML = `Thank you, <strong>${escapeHtml(firstName)}</strong>. We'll review your application and reach out within 24 hours to discuss availability and schedule a tour.`;
       }
 
       successState.classList.add('is-visible');
@@ -567,6 +602,58 @@ function initApplicationForm() {
 
   // Initialize on step 0
   goToStep(0);
+}
+
+/* ============================================================
+   PHONE NUMBER AUTO-FORMATTER
+   ============================================================ */
+
+function initPhoneFormatter() {
+  // Apply to all tel inputs on the page
+  document.querySelectorAll('input[type="tel"]').forEach((input) => {
+    input.addEventListener('input', () => {
+      const digits = input.value.replace(/\D/g, '').slice(0, 10);
+      let formatted = '';
+      if (digits.length === 0) {
+        formatted = '';
+      } else if (digits.length <= 3) {
+        formatted = '(' + digits;
+      } else if (digits.length <= 6) {
+        formatted = '(' + digits.slice(0, 3) + ') ' + digits.slice(3);
+      } else {
+        formatted = '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+      }
+      input.value = formatted;
+    });
+  });
+}
+
+/* ============================================================
+   CHARACTER COUNTER — Booth Rental Goals Textarea
+   ============================================================ */
+
+function initCharCounter() {
+  const textarea = document.getElementById('why_booth_rental');
+  const counter = document.getElementById('why-counter');
+  if (!textarea || !counter) return;
+
+  const MIN_CHARS = 50;
+
+  function updateCounter() {
+    const len = textarea.value.length;
+    if (len >= MIN_CHARS) {
+      counter.textContent = len + ' characters — looks good!';
+      counter.style.color = 'var(--color-success, #2d7a4f)';
+      counter.classList.add('counter--met');
+    } else {
+      counter.textContent = len + ' / ' + MIN_CHARS + ' minimum';
+      counter.style.color = 'var(--color-text-secondary, #888)';
+      counter.classList.remove('counter--met');
+    }
+  }
+
+  textarea.addEventListener('input', updateCounter);
+  updateCounter(); // run once on load
 }
 
 /* ============================================================
@@ -586,7 +673,7 @@ function initContactForm() {
 
     // Validate fields
     const errors = [];
-    form.querySelectorAll('input[required], textarea[required]').forEach((field) => {
+    form.querySelectorAll('input[required], select[required], textarea[required]').forEach((field) => {
       clearFieldError(field);
       const value = field.value.trim();
       const type = field.type;
@@ -594,7 +681,9 @@ function initContactForm() {
       if (!value) {
         errors.push({ field, message: 'This field is required.' });
       } else if (type === 'email' && !isValidEmail(value)) {
-        errors.push({ field, message: 'Please enter a valid email address.' });
+        errors.push({ field, message: 'Please enter a valid email address (e.g., name@example.com)' });
+      } else if (type === 'tel' && value && !isValidPhone(value)) {
+        errors.push({ field, message: 'Please enter a 10-digit phone number.' });
       }
     });
 
@@ -656,7 +745,7 @@ function initContactForm() {
   });
 
   // Live blur validation
-  form.querySelectorAll('input, textarea').forEach((field) => {
+  form.querySelectorAll('input, select, textarea').forEach((field) => {
     field.addEventListener('blur', () => {
       const value = field.value.trim();
       const type = field.type;
@@ -666,7 +755,9 @@ function initContactForm() {
       if (!value) {
         showFieldError(field, 'This field is required.');
       } else if (type === 'email' && !isValidEmail(value)) {
-        showFieldError(field, 'Please enter a valid email address.');
+        showFieldError(field, 'Please enter a valid email address (e.g., name@example.com)');
+      } else if (type === 'tel' && value && !isValidPhone(value)) {
+        showFieldError(field, 'Please enter a 10-digit phone number.');
       } else {
         clearFieldError(field);
       }
@@ -697,6 +788,8 @@ function init() {
   initHamburger();
   initFaqAccordion();
   initApplicationForm();
+  initPhoneFormatter();
+  initCharCounter();
   initContactForm();
   initParallax();
 }

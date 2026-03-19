@@ -6,7 +6,7 @@
 
   <!-- SEO Meta -->
   <title>Contact Allure Beauty Salon | Booth Rental Evansville IN</title>
-  <meta name="description" content="Contact Allure Beauty Salon in Evansville, IN about booth rental and salon suite availability. For licensed stylists seeking a professional space." />
+  <meta name="description" content="Contact Allure Beauty Salon in Evansville, IN about booth rental availability. For licensed stylists seeking a professional space." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://allurebeautysalon.com/contact.html" />
 
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://allurebeautysalon.com/contact.html" />
   <meta property="og:title" content="Contact Allure Beauty Salon | Booth Rental Evansville IN" />
-  <meta property="og:description" content="Contact Allure Beauty Salon about booth rental and salon suite availability in Evansville, IN. For licensed stylists only." />
+  <meta property="og:description" content="Contact Allure Beauty Salon about booth rental availability in Evansville, IN. For licensed stylists only." />
   <meta property="og:image" content="https://allurebeautysalon.com/images/og-default.jpg" />
 
   <!-- Google Fonts -->
@@ -40,7 +40,7 @@
     "@context": "https://schema.org",
     "@type": "BeautySalon",
     "name": "Allure Beauty Salon",
-    "description": "Booth rental and salon suite rental for licensed hair stylists in Evansville, Indiana.",
+    "description": "Booth rental for licensed hair stylists in Evansville, Indiana.",
     "url": "https://allurebeautysalon.com/",
     "telephone": "[PHONE_PLACEHOLDER]",
     "address": {
@@ -65,11 +65,14 @@
   <!-- Navigation -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__logo" href="/index.html">Allure Beauty Salon</a>
+      <a href="index.html" class="site-nav__logo" aria-label="Allure Beauty Salon — Home">
+        <img src="/images/logo.svg" alt="Allure Beauty Salon" class="nav__logo-img" width="52" height="62">
+      </a>
       <div class="site-nav__links" role="list">
         <a class="site-nav__link" href="/about.html" role="listitem">About</a>
         <a class="site-nav__link" href="/booth-rental.html" role="listitem">Booth Rental</a>
         <a class="site-nav__link" href="/faq.html" role="listitem">FAQ</a>
+        <a class="site-nav__link active" href="/contact.html" role="listitem" aria-current="page">Contact</a>
         <a class="btn-primary" href="/apply.html" role="listitem">Apply to Rent a Booth</a>
       </div>
       <button
@@ -110,12 +113,12 @@
     <!-- SECTION 1: Page Header -->
     <header class="page-header" aria-labelledby="contact-page-heading">
       <div class="container">
-        <span class="eyebrow">Contact</span>
+        <span class="eyebrow">GET IN TOUCH</span>
         <h1 class="display-section page-header__headline" id="contact-page-heading">
-          Let's Talk
+          Questions About Booth Rental?
         </h1>
         <p class="page-header__sub">
-          Have questions about our booth rental program? We're happy to chat before you apply.
+          We're happy to answer questions, schedule a tour, or walk you through the application process.
         </p>
       </div>
     </header>
@@ -126,12 +129,8 @@
         <div class="form-section__inner">
 
           <!-- NOT appointment booking notice — prominently placed -->
-          <div class="apply-disclaimer" role="note" aria-label="Important: this form is for stylists only">
-            <strong>Please note:</strong> This contact form is for licensed beauty professionals with questions about our booth rental and salon suite rental program.
-            <strong>We are not able to accept client appointment requests through this form.</strong>
-            If you are a client looking to book a service, please contact your stylist directly.
-            <br /><br />
-            Ready to apply instead? <a href="/apply.html">Apply to Rent a Booth →</a>
+          <div class="apply-disclaimer" role="note" aria-label="Important: this form is for stylists only" style="border-left: 4px solid var(--color-accent, #b08c6a); background: var(--color-surface, #f9f5f0); padding: var(--space-4, 1rem) var(--space-5, 1.25rem); border-radius: var(--radius-md, 6px); margin-bottom: var(--space-5, 1.25rem);">
+            <strong>Looking to book a hair appointment?</strong> Allure is a booth rental facility — our independent stylists manage their own bookings directly. We don't book client appointments through this form.
           </div>
 
           <h2 class="sr-only" id="contact-form-heading">Contact form</h2>
@@ -154,6 +153,29 @@
 
             <!-- Error banner -->
             <div class="form-error-banner" role="alert" aria-live="assertive"></div>
+
+            <!-- What's your question about? -->
+            <div class="form-field">
+              <label class="form-label" for="contact_subject">
+                What's your question about? <span class="required-mark" aria-hidden="true">*</span>
+              </label>
+              <select
+                id="contact_subject"
+                name="subject"
+                class="form-select"
+                required
+                aria-required="true"
+                aria-describedby="contact_subject-error"
+              >
+                <option value="" disabled selected>Select a topic…</option>
+                <option value="availability">Booth Rental Availability</option>
+                <option value="rates_terms">Rental Rates &amp; Terms</option>
+                <option value="tour">Scheduling a Tour</option>
+                <option value="application_status">Application Status</option>
+                <option value="other">Other</option>
+              </select>
+              <p class="field-error" id="contact_subject-error" role="alert" aria-live="polite" style="display:none;"></p>
+            </div>
 
             <!-- First Name + Last Name (side by side on desktop) -->
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);" class="name-row">
@@ -254,7 +276,7 @@
 
             <!-- Disclaimer below form -->
             <p style="font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.04em; color: var(--color-text-secondary); opacity: 0.65; margin-top: var(--space-4); line-height: 1.7;">
-              By submitting this form, you confirm that you are a licensed beauty professional inquiring about booth or salon suite rental at Allure Beauty Salon. This is not a client-facing appointment booking form.
+              By submitting this form, you confirm that you are a licensed beauty professional inquiring about booth rental at Allure Beauty Salon. This is not a client-facing appointment booking form.
               Ready to apply? <a href="/apply.html" style="color: var(--color-accent);">Apply to Rent a Booth →</a>
             </p>
 
@@ -265,8 +287,7 @@
             <div class="contact-success__icon" aria-hidden="true">✓</div>
             <h3 class="contact-success__headline">Message Sent!</h3>
             <p class="contact-success__body">
-              Thanks for reaching out. We'll get back to you within 1–2 business days.
-              <!-- TODO: Confirm response time with Ruth Bindle -->
+              Thanks for reaching out! We'll get back to you within 24 hours.
             </p>
           </div>
 
@@ -314,12 +335,22 @@
       </div>
     </section>
 
-    <!-- SECTION 3: Apply Bridge -->
+    <!-- SECTION 3: Tour CTA -->
+    <section class="contact-bridge" aria-labelledby="tour-cta-heading" style="border-bottom: 1px solid var(--color-border, #e5e0d8);">
+      <div class="container">
+        <h2 class="contact-bridge__headline" id="tour-cta-heading">See the Space in Person</h2>
+        <p class="contact-bridge__copy">The best way to decide if Allure is right for you is to come see it. We offer tours by appointment — just reach out.</p>
+        <a class="btn-primary" href="/apply.html">Request a Tour</a>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Apply Bridge -->
     <section class="contact-bridge" aria-labelledby="contact-bridge-heading">
       <div class="container">
-        <h2 class="contact-bridge__headline" id="contact-bridge-heading">Ready to Apply?</h2>
-        <p class="contact-bridge__copy">Skip the small talk and go straight to the application.</p>
-        <a class="btn-primary" href="/apply.html">Apply to Rent a Booth</a>
+        <div style="border: 2px solid var(--color-accent, #b08c6a); border-radius: var(--radius-md, 6px); padding: var(--space-6, 1.5rem) var(--space-7, 2rem); text-align: center; max-width: 560px; margin: 0 auto;">
+          <p style="font-family: var(--font-ui, sans-serif); font-size: 13px; letter-spacing: 0.04em; margin-bottom: var(--space-4, 1rem);">Ready to apply? Skip the questions and go straight to the booth rental application.</p>
+          <a class="btn-primary" href="/apply.html" id="contact-bridge-heading">Apply to Rent a Booth</a>
+        </div>
       </div>
     </section>
 
@@ -330,6 +361,7 @@
     <div class="site-footer__inner">
       <div class="footer-brand">
         <a class="footer-brand__logo" href="/index.html">Allure Beauty Salon</a>
+        <span class="footer-tagline">Be Your Own Kind of Beautiful</span>
         <p class="footer-brand__location">Evansville, Indiana</p>
         <p class="footer-brand__tagline">Your chair. Your clients. Your business.</p>
         <p class="footer-brand__copyright">© 2026 Allure Beauty Salon — Evansville, Indiana</p>
@@ -354,7 +386,7 @@
       </nav>
     </div>
     <p class="footer-disclaimer">
-      This website is for licensed beauty professionals interested in booth and salon suite rental. Allure Beauty Salon is not accepting client appointment requests through this site. For client bookings, please contact your stylist directly.
+      This website is for licensed beauty professionals interested in booth rental. Allure Beauty Salon is not accepting client appointment requests through this site. For client bookings, please contact your stylist directly.
     </p>
   </footer>
 

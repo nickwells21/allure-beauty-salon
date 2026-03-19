@@ -6,7 +6,7 @@
 
   <!-- SEO Meta -->
   <title>Apply to Rent a Booth | Allure Beauty Salon Evansville IN</title>
-  <meta name="description" content="Apply for booth rental or salon suite rental at Allure Beauty Salon in Evansville, IN. Licensed stylists welcome. Takes less than 5 minutes." />
+  <meta name="description" content="Apply for booth rental at Allure Beauty Salon in Evansville, IN. Licensed stylists welcome. Takes less than 5 minutes." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://allurebeautysalon.com/apply.html" />
 
@@ -31,7 +31,7 @@
     "@context": "https://schema.org",
     "@type": "BeautySalon",
     "name": "Allure Beauty Salon",
-    "description": "Booth rental and salon suite rental for licensed hair stylists in Evansville, Indiana.",
+    "description": "Booth rental for licensed hair stylists in Evansville, Indiana.",
     "url": "https://allurebeautysalon.com/",
     "telephone": "[PHONE_PLACEHOLDER]",
     "address": {
@@ -56,11 +56,14 @@
   <!-- Navigation -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="site-nav__inner">
-      <a class="site-nav__logo" href="/index.html">Allure Beauty Salon</a>
+      <a href="index.html" class="site-nav__logo" aria-label="Allure Beauty Salon — Home">
+        <img src="/images/logo.svg" alt="Allure Beauty Salon" class="nav__logo-img" width="52" height="62">
+      </a>
       <div class="site-nav__links" role="list">
         <a class="site-nav__link" href="/about.html" role="listitem">About</a>
         <a class="site-nav__link" href="/booth-rental.html" role="listitem">Booth Rental</a>
         <a class="site-nav__link" href="/faq.html" role="listitem">FAQ</a>
+        <a class="site-nav__link" href="/contact.html" role="listitem">Contact</a>
         <a class="btn-primary" href="/apply.html" role="listitem" aria-current="page">Apply to Rent a Booth</a>
       </div>
       <button
@@ -101,7 +104,8 @@
     <!-- Page Header -->
     <header class="apply-header">
       <div class="container">
-        <h1 class="display-md apply-header__headline" id="apply-heading">Apply to Rent a Booth at Allure Beauty Salon</h1>
+        <span class="eyebrow" style="font-family: var(--font-mono, 'Space Mono', monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: var(--space-3, 0.75rem); opacity: 0.65;">BOOTH RENTAL APPLICATION · EVANSVILLE, IN</span>
+        <h1 class="display-md apply-header__headline" id="apply-heading">Apply to Rent a Booth at Allure</h1>
         <p class="apply-header__sub">It takes about 3 minutes. We review all applications personally.</p>
       </div>
     </header>
@@ -112,11 +116,16 @@
         <div class="form-section__inner">
 
           <!-- Disclaimer — required above form -->
-          <div class="apply-disclaimer" role="note" aria-label="Important notice about this form">
-            <strong>This is a booth rental application for licensed beauty professionals — not an appointment booking form.</strong>
-            If you're looking to book a hair appointment, please contact one of our stylists directly.
-            If you're a licensed cosmetologist, hairstylist, or beauty professional interested in renting a booth or salon suite in Evansville, IN, you're in the right place.
-            Fill out the short form below and we'll be in touch within <!-- TODO: confirm response time with Ruth Bindle -->1–2 business days.
+          <div class="apply-disclaimer" role="note" aria-label="Important notice about this form" style="border-left: 4px solid var(--color-accent, #b08c6a); background: var(--color-surface, #f9f5f0); padding: var(--space-4, 1rem) var(--space-5, 1.25rem); border-radius: var(--radius-md, 6px); margin-bottom: var(--space-5, 1.25rem);">
+            <strong>This is a booth rental application for licensed stylists — not an appointment booking form.</strong>
+            If you're looking to book a hair service, please <a href="/contact.html">contact us directly</a>.
+          </div>
+
+          <!-- Trust Signal Bar -->
+          <div class="trust-signal-bar" role="list" aria-label="Key benefits" style="display: flex; flex-wrap: wrap; gap: var(--space-3, 0.75rem) var(--space-5, 1.25rem); margin-bottom: var(--space-6, 1.5rem); font-family: var(--font-ui, sans-serif); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-secondary, #666);">
+            <span role="listitem">◆ Licensed stylists only</span>
+            <span role="listitem">◆ No commission taken</span>
+            <span role="listitem">◆ Response within 24 hrs</span>
           </div>
 
           <!-- Application Form Wrapper -->
@@ -128,24 +137,24 @@
 
                 <li class="stepper__step stepper__step--active" aria-current="step">
                   <div class="stepper__number"><span>1</span></div>
-                  <span class="stepper__label">About You</span>
+                  <span class="stepper__label">Your Background</span>
                 </li>
 
                 <li class="stepper__step stepper__step--remaining">
                   <div class="stepper__number"><span>2</span></div>
-                  <span class="stepper__label">Your Practice</span>
+                  <span class="stepper__label">Your Business</span>
                 </li>
 
                 <li class="stepper__step stepper__step--remaining">
                   <div class="stepper__number"><span>3</span></div>
-                  <span class="stepper__label">Final Details</span>
+                  <span class="stepper__label">Your Story</span>
                 </li>
 
               </ol>
 
               <!-- Mobile compact stepper label -->
               <p class="stepper-compact" aria-live="polite">
-                Step <strong>1</strong> of 3 — <strong>About You</strong>
+                Step <strong>1</strong> of 3 — <strong>Your Background</strong>
               </p>
             </nav>
 
@@ -177,10 +186,10 @@
               <!-- ============================================
                    STEP 1 — About You
                    ============================================ -->
-              <div class="form-panel is-active" id="step-panel-1" data-step="1" aria-label="Step 1: About You">
+              <div class="form-panel is-active" id="step-panel-1" data-step="1" aria-label="Step 1: Your Background">
 
                 <h2 class="text-ui" style="color: var(--color-text-secondary); margin-bottom: var(--space-5);">
-                  Step 1 of 3 — Your Info
+                  Step 1 of 3 — Your Background
                 </h2>
 
                 <!-- First Name -->
@@ -309,24 +318,55 @@
                   <p class="field-error" id="years_experience-error" role="alert" aria-live="polite" style="display:none;"></p>
                 </div>
 
-                <!-- Primary Specialty -->
-                <div class="form-field">
-                  <label class="form-label" for="specialty">
-                    Primary Specialty <span class="required-mark" aria-hidden="true">*</span>
+                <!-- Primary Specialties — checkbox group -->
+                <fieldset class="form-fieldset" id="specialty-fieldset" data-required-checkboxes aria-required="true">
+                  <legend class="form-legend">
+                    Primary Specialties <span class="required-mark" aria-hidden="true">*</span>
+                  </legend>
+                  <p class="form-helper" style="margin-bottom: var(--space-2);">Select all that apply — check at least one.</p>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="cuts_color" aria-describedby="specialty-error" />
+                    <span>Cuts &amp; Color</span>
                   </label>
-                  <input
-                    type="text"
-                    id="specialty"
-                    name="specialty"
-                    class="form-input"
-                    placeholder="e.g., Color, Cuts, Natural Hair, Extensions..."
-                    required
-                    aria-required="true"
-                    aria-describedby="specialty-helper specialty-error"
-                  />
-                  <p class="form-helper" id="specialty-helper">What do you do best?</p>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="balayage_highlights" />
+                    <span>Balayage / Highlights</span>
+                  </label>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="texture_relaxers" />
+                    <span>Texture / Relaxers</span>
+                  </label>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="natural_hair" />
+                    <span>Natural Hair</span>
+                  </label>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="braiding" />
+                    <span>Braiding</span>
+                  </label>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="extensions" />
+                    <span>Extensions</span>
+                  </label>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="barber_fade" />
+                    <span>Barber / Fade</span>
+                  </label>
+
+                  <label class="checkbox-option">
+                    <input type="checkbox" name="specialty" value="other" />
+                    <span>Other</span>
+                  </label>
+
                   <p class="field-error" id="specialty-error" role="alert" aria-live="polite" style="display:none;"></p>
-                </div>
+                </fieldset>
 
                 <!-- Step 1 Navigation -->
                 <div class="form-nav-buttons">
@@ -346,10 +386,10 @@
               <!-- ============================================
                    STEP 2 — Your Practice
                    ============================================ -->
-              <div class="form-panel" id="step-panel-2" data-step="2" aria-label="Step 2: Your Practice">
+              <div class="form-panel" id="step-panel-2" data-step="2" aria-label="Step 2: Your Business">
 
                 <h2 class="text-ui" style="color: var(--color-text-secondary); margin-bottom: var(--space-5);">
-                  Step 2 of 3 — Your Setup
+                  Step 2 of 3 — Your Business
                 </h2>
 
                 <!-- Current Booking Model — Radio group -->
@@ -367,7 +407,7 @@
                       value="established"
                       aria-required="true"
                     />
-                    I have my own established clients
+                    Yes — I have an established client base
                   </label>
 
                   <label class="radio-option">
@@ -415,10 +455,10 @@
                   >
                     <option value="" disabled selected>Select...</option>
                     <option value="asap">As soon as possible</option>
-                    <option value="1_month">Within 1 month</option>
+                    <option value="within_30">Within 30 days</option>
                     <option value="1_3_months">1–3 months</option>
                     <option value="3_6_months">3–6 months</option>
-                    <option value="exploring">Just exploring for now</option>
+                    <option value="exploring">Just exploring</option>
                   </select>
                   <p class="form-helper" id="movein-helper">Approximate is fine.</p>
                   <p class="field-error" id="move_in_timeframe-error" role="alert" aria-live="polite" style="display:none;"></p>
@@ -438,7 +478,7 @@
                     autocomplete="url"
                     aria-describedby="portfolio-helper"
                   />
-                  <p class="form-helper" id="portfolio-helper">Optional — share your work if you'd like.</p>
+                  <p class="form-helper" id="portfolio-helper">Optional but recommended — even a personal Instagram works.</p>
                   <p class="field-error" id="portfolio_link-error" role="alert" style="display:none;"></p>
                 </div>
 
@@ -486,16 +526,16 @@
               <!-- ============================================
                    STEP 3 — Final Details
                    ============================================ -->
-              <div class="form-panel" id="step-panel-3" data-step="3" aria-label="Step 3: Final Details">
+              <div class="form-panel" id="step-panel-3" data-step="3" aria-label="Step 3: Your Story">
 
                 <h2 class="text-ui" style="color: var(--color-text-secondary); margin-bottom: var(--space-5);">
-                  Step 3 of 3 — Almost Done
+                  Step 3 of 3 — Your Story
                 </h2>
 
                 <!-- Why booth rental (textarea) -->
                 <div class="form-field">
                   <label class="form-label" for="why_booth_rental">
-                    Why are you interested in booth rental? <span class="required-mark" aria-hidden="true">*</span>
+                    Tell us about your booth rental goals <span class="required-mark" aria-hidden="true">*</span>
                   </label>
                   <textarea
                     id="why_booth_rental"
@@ -505,12 +545,16 @@
                     required
                     aria-required="true"
                     minlength="50"
-                    aria-describedby="why-helper why_booth_rental-error"
+                    aria-describedby="why-helper why-counter why_booth_rental-error"
                     style="min-height: 120px;"
                   ></textarea>
-                  <p class="form-helper" id="why-helper">At least 50 characters. Tell us about your goals, what you're looking for, or any questions.</p>
+                  <p class="form-helper" id="why-helper">What draws you to independent booth rental? What kind of business are you building? (50 characters minimum)</p>
+                  <p class="char-counter" id="why-counter" aria-live="polite" style="font-family: var(--font-ui, sans-serif); font-size: 11px; letter-spacing: 0.04em; color: var(--color-text-secondary, #888); margin-top: 4px;">0 / 50 minimum</p>
                   <p class="field-error" id="why_booth_rental-error" role="alert" aria-live="polite" style="display:none;"></p>
                 </div>
+
+                <!-- References intro -->
+                <p class="form-helper" style="margin-bottom: var(--space-3);">Optional: List one or two professionals who can speak to your work.</p>
 
                 <!-- Reference 1 -->
                 <div class="form-field">
@@ -605,8 +649,7 @@
                       aria-describedby="consent-error"
                     />
                     <span>
-                      I confirm that I hold an active Indiana cosmetology or beauty professional license and I am applying for booth or salon suite rental — not a client appointment. I agree to be contacted by Allure Beauty Salon regarding my application.
-                      <!-- TODO: Link to privacy policy once created -->
+                      I agree to be contacted about my application and understand this is for <a href="/booth-rental.html">booth rental</a>, not client services.
                     </span>
                   </label>
                   <p class="field-error" id="consent-error" role="alert" aria-live="polite" style="display:none;"></p>
@@ -618,7 +661,7 @@
                     type="button"
                     class="btn-ghost"
                     data-action="back"
-                    aria-label="Back to step 2: Your Practice"
+                    aria-label="Back to step 2: Your Business"
                   >
                     ← Back
                   </button>
@@ -631,6 +674,7 @@
                     Submit My Application
                   </button>
                 </div>
+                <p style="font-family: var(--font-ui, sans-serif); font-size: 11px; letter-spacing: 0.04em; color: var(--color-text-secondary, #888); text-align: right; margin-top: var(--space-3, 0.75rem);">We review every application and respond within 24 hours.</p>
 
               </div><!-- /step-panel-3 -->
 
@@ -648,11 +692,12 @@
             tabindex="-1"
           >
             <div class="form-success__icon" aria-hidden="true">✓</div>
-            <h2 class="form-success__headline">Application Received — Thank You!</h2>
+            <h2 class="form-success__headline">Application Received!</h2>
             <p class="form-success__body">
-              We got your application and we're excited to connect. Someone from Allure Beauty Salon will reach out to you within 1–2 business days to discuss availability and next steps.
+              Thank you for applying to rent a booth at Allure Beauty Salon. We'll review your application and reach out within 24 hours to discuss availability and schedule a tour.
             </p>
-            <a class="form-success__link" href="/faq.html">Read the FAQ →</a>
+            <p class="form-success__body" style="margin-top: var(--space-2);">We'll contact you at the email you provided.</p>
+            <a class="form-success__link" href="/booth-rental.html">Learn more about what's included →</a>
             <a class="btn-ghost" href="/index.html" style="margin-top: var(--space-2);">Back to Home</a>
           </div>
 
@@ -667,6 +712,7 @@
     <div class="site-footer__inner">
       <div class="footer-brand">
         <a class="footer-brand__logo" href="/index.html">Allure Beauty Salon</a>
+        <span class="footer-tagline">Be Your Own Kind of Beautiful</span>
         <p class="footer-brand__location">Evansville, Indiana</p>
         <p class="footer-brand__tagline">Your chair. Your clients. Your business.</p>
         <p class="footer-brand__copyright">© 2026 Allure Beauty Salon — Evansville, Indiana</p>
@@ -691,7 +737,7 @@
       </nav>
     </div>
     <p class="footer-disclaimer">
-      This website is for licensed beauty professionals interested in booth and salon suite rental. Allure Beauty Salon is not accepting client appointment requests through this site. For client bookings, please contact your stylist directly.
+      This website is for licensed beauty professionals interested in booth rental. Allure Beauty Salon is not accepting client appointment requests through this site. For client bookings, please contact your stylist directly.
     </p>
   </footer>
 
