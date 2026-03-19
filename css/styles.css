@@ -502,7 +502,7 @@ h4, h5, h6 {
   pointer-events: none;
   z-index: 1;
   color: #ffffff;
-  opacity: 0.09;
+  opacity: 0.14;
   mix-blend-mode: screen;
 }
 
@@ -2467,6 +2467,44 @@ h4, h5, h6 {
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--color-text-secondary);
+}
+
+/* === CONTENT CARDS ABOVE LOGO WATERMARK ===
+   These elements sit at z-index: 2, above the fixed watermark (z-index: 1).
+   The logo shows in section backgrounds + gutters between cards,
+   but is covered by the cards/text-blocks themselves.
+======================================================= */
+
+.benefit-card,
+.testimonial-card,
+.cta-banner,
+.step,
+.photo-gallery__item,
+.amenity-item,
+.who-its-for__content,
+.who-its-for__image,
+.story-split__image,
+.story-split__text,
+.form-panel,
+.form-card,
+.contact-tour-cta,
+.contact-apply-cta,
+.contact-form-wrapper,
+.faq-section__list,
+.pricing__card,
+.disclaimer-box,
+.trust-signals,
+.apply-disclaimer,
+.brand-quote,
+.mission,
+.values__grid,
+.page-header .container,
+.apply-header .container,
+.about-intro .container,
+.pull-quote .container,
+.intro-text .container {
+  position: relative;
+  z-index: 2;
 }
 
 /* === PHOTO GALLERY STRIP === */
