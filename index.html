@@ -48,6 +48,32 @@
 </head>
 <body>
 
+  <!-- Fixed logo watermark — stays in place on scroll -->
+  <div class="site-watermark" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+      <defs>
+        <path id="hero-arc-right"  d="M 204,81  A 108,108 0 0,1 169,281"/>
+        <path id="hero-arc-bottom" d="M  81,258 A 108,108 0 0,0 219,258"/>
+      </defs>
+      <path d="M 204,81 A 108,108 0 1,1 96,81"
+            stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
+            letter-spacing="3.5" fill="currentColor" text-anchor="middle">
+        <textPath href="#hero-arc-right" startOffset="50%">BE YOUR OWN</textPath>
+      </text>
+      <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
+            letter-spacing="2.5" fill="currentColor" text-anchor="middle">
+        <textPath href="#hero-arc-bottom" startOffset="50%">KIND OF BEAUTIFUL</textPath>
+      </text>
+      <text x="152" y="215"
+            font-family="'Great Vibes', cursive"
+            font-size="138"
+            text-anchor="middle"
+            fill="currentColor"
+            transform="rotate(-8, 152, 195)">Allure</text>
+    </svg>
+  </div>
+
   <!-- Skip Link -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -115,40 +141,6 @@
     <!-- SECTION 1: Hero -->
     <section class="hero" aria-label="Hero">
       <div class="hero__bg" role="img" aria-label="Salon interior placeholder"></div>
-
-      <!-- Large ghost logo watermark — decorative background element -->
-      <div class="hero__logo-watermark" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360" class="hero__logo-svg">
-          <defs>
-            <path id="hero-arc-right"  d="M 204,81  A 108,108 0 0,1 169,281"/>
-            <path id="hero-arc-bottom" d="M  81,258 A 108,108 0 0,0 219,258"/>
-          </defs>
-
-          <!-- Circle arc — breaks at top, badge style -->
-          <path d="M 204,81 A 108,108 0 1,1 96,81"
-                stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-          <!-- BE YOUR OWN — right arc, clockwise from 1 o'clock to 5 o'clock -->
-          <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
-                letter-spacing="3.5" fill="currentColor" text-anchor="middle">
-            <textPath href="#hero-arc-right" startOffset="50%">BE YOUR OWN</textPath>
-          </text>
-
-          <!-- KIND OF BEAUTIFUL — bottom arc, reads left to right -->
-          <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
-                letter-spacing="2.5" fill="currentColor" text-anchor="middle">
-            <textPath href="#hero-arc-bottom" startOffset="50%">KIND OF BEAUTIFUL</textPath>
-          </text>
-
-          <!-- Allure script — large, rotated, flowing through the circle -->
-          <text x="152" y="215"
-                font-family="'Great Vibes', cursive"
-                font-size="138"
-                text-anchor="middle"
-                fill="currentColor"
-                transform="rotate(-8, 152, 195)">Allure</text>
-        </svg>
-      </div>
 
       <div class="hero__content">
         <div class="hero__inner">

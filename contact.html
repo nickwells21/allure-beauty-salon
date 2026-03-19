@@ -56,6 +56,32 @@
 </head>
 <body>
 
+  <!-- Fixed logo watermark — stays in place on scroll -->
+  <div class="site-watermark" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+      <defs>
+        <path id="ct-arc-right"  d="M 204,81  A 108,108 0 0,1 169,281"/>
+        <path id="ct-arc-bottom" d="M  81,258 A 108,108 0 0,0 219,258"/>
+      </defs>
+      <path d="M 204,81 A 108,108 0 1,1 96,81"
+            stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
+            letter-spacing="3.5" fill="currentColor" text-anchor="middle">
+        <textPath href="#ct-arc-right" startOffset="50%">BE YOUR OWN</textPath>
+      </text>
+      <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
+            letter-spacing="2.5" fill="currentColor" text-anchor="middle">
+        <textPath href="#ct-arc-bottom" startOffset="50%">KIND OF BEAUTIFUL</textPath>
+      </text>
+      <text x="152" y="215"
+            font-family="'Great Vibes', cursive"
+            font-size="138"
+            text-anchor="middle"
+            fill="currentColor"
+            transform="rotate(-8, 152, 195)">Allure</text>
+    </svg>
+  </div>
+
   <!-- Skip Link -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
