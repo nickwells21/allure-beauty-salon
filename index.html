@@ -145,17 +145,50 @@
       <div class="hero__bg" role="img" aria-label="Salon interior placeholder"></div>
 
       <div class="hero__content">
-        <div class="hero__inner">
-          <span class="eyebrow eyebrow--light">Evansville, Indiana</span>
-          <p class="hero__tagline">Be Your Own Kind of Beautiful</p>
-          <h1 class="display-hero hero__headline">Your Chair. Your Clients. Your Business.</h1>
-          <p class="hero__sub">
-            Allure Beauty Salon offers premium booth rental in Evansville, IN — built for independent stylists ready to own their career.
-          </p>
-          <div class="hero__cta-group">
-            <a class="btn-primary" href="/apply.html">Apply to Rent a Booth</a>
-            <a class="hero__secondary-link" href="/booth-rental.html">Learn what's included →</a>
+        <div class="hero__grid">
+
+          <!-- Left: text -->
+          <div class="hero__inner">
+            <span class="eyebrow eyebrow--light">Evansville, Indiana</span>
+            <p class="hero__tagline">Be Your Own Kind of Beautiful</p>
+            <h1 class="display-hero hero__headline">Your Chair. Your Clients. Your Business.</h1>
+            <p class="hero__sub">
+              Allure Beauty Salon offers premium booth rental in Evansville, IN — built for independent stylists ready to own their career.
+            </p>
+            <div class="hero__cta-group">
+              <a class="btn-primary" href="/apply.html">Apply to Rent a Booth</a>
+              <a class="hero__secondary-link" href="/booth-rental.html">Learn what's included →</a>
+            </div>
           </div>
+
+          <!-- Right: Allure logo panel -->
+          <div class="hero__logo-col" aria-hidden="true">
+            <div class="hero__logo-panel">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360" class="hero__logo-svg">
+                <defs>
+                  <path id="hp-arc-right"  d="M 204,81  A 108,108 0 0,1 169,281"/>
+                  <path id="hp-arc-bottom" d="M  81,258 A 108,108 0 0,0 219,258"/>
+                </defs>
+                <path d="M 204,81 A 108,108 0 1,1 96,81"
+                      stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
+                      letter-spacing="3.5" fill="currentColor" text-anchor="middle">
+                  <textPath href="#hp-arc-right" startOffset="50%">BE YOUR OWN</textPath>
+                </text>
+                <text font-family="'Space Mono', monospace" font-size="11.5" font-weight="700"
+                      letter-spacing="2.5" fill="currentColor" text-anchor="middle">
+                  <textPath href="#hp-arc-bottom" startOffset="50%">KIND OF BEAUTIFUL</textPath>
+                </text>
+                <text x="152" y="215"
+                      font-family="'Great Vibes', cursive"
+                      font-size="138"
+                      text-anchor="middle"
+                      fill="currentColor"
+                      transform="rotate(-8, 152, 195)">Allure</text>
+              </svg>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

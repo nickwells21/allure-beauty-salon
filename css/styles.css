@@ -578,8 +578,15 @@ h4, h5, h6 {
   padding-bottom: var(--space-9);
 }
 
+/* Two-column hero grid */
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: center;
+}
+
 .hero__inner {
-  max-width: 680px;
   background: rgba(6, 6, 6, 0.72);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -588,6 +595,60 @@ h4, h5, h6 {
   padding: clamp(2rem, 5vw, 3.5rem);
   position: relative;
   z-index: 3;
+}
+
+/* Right column wrapper — centres the square */
+.hero__logo-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Square logo panel */
+.hero__logo-panel {
+  aspect-ratio: 1;
+  width: min(100%, 460px);
+  background: rgba(10, 8, 6, 0.55);
+  border: 1px solid rgba(107, 76, 53, 0.35);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10%;
+  position: relative;
+  z-index: 3;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+/* Subtle green radial glow inside the panel */
+.hero__logo-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 75% 75% at 50% 50%, rgba(74, 124, 111, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero__logo-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  color: var(--color-text-primary);
+  position: relative; /* above ::before */
+}
+
+/* Mobile: single column, hide logo panel below md */
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__logo-col {
+    display: none;
+  }
 }
 
 .hero__headline {
