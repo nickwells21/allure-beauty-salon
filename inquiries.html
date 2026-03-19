@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Inquiries — Allure Beauty Salon</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@0,400;0,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0f0f0f;
+      color: #f0ece4;
+      font-family: "Space Mono", "Courier New", monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      background: #141414;
+      border-bottom: 1px solid #2e2b28;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .page-header__logo {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #f0ece4;
+      text-decoration: none;
+    }
+
+    .page-header__title {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8a8580;
+    }
+
+    .page-header__actions {
+      margin-left: auto;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-small {
+      font-family: inherit;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid #2e2b28;
+      background: transparent;
+      color: #8a8580;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-small:hover { color: #f0ece4; border-color: #8a8580; }
+
+    .btn-small--primary {
+      background: #6b4c35;
+      border-color: #6b4c35;
+      color: #f0ece4;
+    }
+
+    .btn-small--primary:hover { background: #7d5a40; border-color: #7d5a40; color: #f0ece4; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      background: #1a1a1a;
+      border: 1px solid #2e2b28;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      min-width: 120px;
+    }
+
+    .stat-box__num {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 2rem;
+      font-style: italic;
+      color: #c9a87c;
+      line-height: 1;
+    }
+
+    .stat-box__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8a8580;
+      margin-top: 0.25rem;
+    }
+
+    .note-banner {
+      background: #1a1a14;
+      border: 1px solid #3a3520;
+      border-radius: 6px;
+      padding: 0.875rem 1.25rem;
+      font-size: 0.75rem;
+      color: #8a8570;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .inquiry-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .inquiry-card {
+      background: #1a1a1a;
+      border: 1px solid #2e2b28;
+      border-left: 3px solid #6b4c35;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.75rem 1.5rem;
+      align-items: start;
+    }
+
+    .inquiry-card__name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.125rem;
+      font-style: italic;
+      color: #f0ece4;
+      margin-bottom: 0.25rem;
+    }
+
+    .inquiry-card__service {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #2e2b28;
+      color: #c9a87c;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    .inquiry-card__contact a {
+      color: #4a9e8e;
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .inquiry-card__contact a:hover { text-decoration: underline; }
+
+    .inquiry-card__message {
+      margin-top: 0.5rem;
+      color: #8a8580;
+      font-size: 0.8rem;
+      font-family: Georgia, serif;
+      font-style: italic;
+      border-top: 1px solid #2e2b28;
+      padding-top: 0.5rem;
+    }
+
+    .inquiry-card__date {
+      font-size: 0.65rem;
+      color: #8a8580;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #8a8580;
+    }
+
+    .empty-state__icon {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 3rem;
+      font-style: italic;
+      color: #2e2b28;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: #8a8580;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+
+    @media (max-width: 600px) {
+      .inquiry-card { grid-template-columns: 1fr; }
+      .inquiry-card__date { text-align: left; }
+      .page-header { padding: 1rem; }
+      .page-header__actions { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="/index.html" class="page-header__logo">Allure</a>
+    <span class="page-header__title">Client Inquiries</span>
+    <div class="page-header__actions">
+      <button class="btn-small" id="refresh-btn">Refresh</button>
+      <button class="btn-small btn-small--primary" id="export-btn">Export CSV</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="stats-row" id="stats-row">
+      <div class="stat-box">
+        <div class="stat-box__num" id="stat-total">—</div>
+        <div class="stat-box__label">Total Inquiries</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box__num" id="stat-today">—</div>
+        <div class="stat-box__label">Today</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box__num" id="stat-week">—</div>
+        <div class="stat-box__label">This Week</div>
+      </div>
+    </div>
+
+    <p class="note-banner">
+      ⚠ Inquiries are stored on the server. They reset when the site is redeployed to Railway.
+      Use <strong>Export CSV</strong> to save a copy before updating the site.
+    </p>
+
+    <div id="inquiry-list-wrap">
+      <p class="loading">Loading inquiries…</p>
+    </div>
+
+  </div>
+
+  <script>
+    function formatDate(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        + ' at ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    }
+
+    function isPhone(s) {
+      return /^[\d\s()\-+]{7,}$/.test(s);
+    }
+
+    function contactLink(contact) {
+      if (contact.includes('@')) {
+        return `<a href="mailto:${contact}">${contact}</a>`;
+      }
+      if (isPhone(contact)) {
+        const digits = contact.replace(/\D/g, '');
+        return `<a href="tel:+1${digits}">${contact}</a>`;
+      }
+      return contact;
+    }
+
+    let allData = [];
+
+    function renderInquiries(data) {
+      allData = data;
+      const wrap = document.getElementById('inquiry-list-wrap');
+
+      // Stats
+      const now = new Date();
+      const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const weekStart  = new Date(todayStart); weekStart.setDate(todayStart.getDate() - 7);
+
+      document.getElementById('stat-total').textContent = data.length;
+      document.getElementById('stat-today').textContent = data.filter(i => new Date(i.date) >= todayStart).length;
+      document.getElementById('stat-week').textContent  = data.filter(i => new Date(i.date) >= weekStart).length;
+
+      if (!data.length) {
+        wrap.innerHTML = `<div class="empty-state">
+          <span class="empty-state__icon">Allure</span>
+          <p>No client inquiries yet.</p>
+          <p style="margin-top:.5rem;font-size:.75rem;">They'll appear here when clients submit the "Book a Service" form.</p>
+        </div>`;
+        return;
+      }
+
+      wrap.innerHTML = `<div class="inquiry-list">
+        ${data.map(inq => `
+          <div class="inquiry-card">
+            <div>
+              <p class="inquiry-card__name">${inq.name}</p>
+              <span class="inquiry-card__service">${inq.service}</span>
+              <p class="inquiry-card__contact">${contactLink(inq.contact)}</p>
+              ${inq.message ? `<p class="inquiry-card__message">"${inq.message}"</p>` : ''}
+            </div>
+            <div class="inquiry-card__date">${formatDate(inq.date)}</div>
+          </div>
+        `).join('')}
+      </div>`;
+    }
+
+    function loadInquiries() {
+      document.getElementById('inquiry-list-wrap').innerHTML = '<p class="loading">Loading…</p>';
+      fetch('/api/inquiries')
+        .then(r => r.json())
+        .then(renderInquiries)
+        .catch(() => {
+          document.getElementById('inquiry-list-wrap').innerHTML =
+            '<p class="loading" style="color:#e53e3e;">Could not load inquiries.</p>';
+        });
+    }
+
+    document.getElementById('refresh-btn').addEventListener('click', loadInquiries);
+
+    document.getElementById('export-btn').addEventListener('click', () => {
+      if (!allData.length) { alert('No inquiries to export.'); return; }
+      const header = 'Date,Name,Contact,Service,Message';
+      const rows = allData.map(i => [
+        i.date, i.name, i.contact, i.service,
+        (i.message || '').replace(/"/g, '""')
+      ].map(v => `"${v}"`).join(','));
+      const csv = [header, ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url  = URL.createObjectURL(blob);
+      const a    = Object.assign(document.createElement('a'), { href: url, download: 'allure-inquiries.csv' });
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    loadInquiries();
+  </script>
+
+</body>
+</html>

@@ -770,6 +770,96 @@ function initContactForm() {
 }
 
 /* ============================================================
+   CLIENT INQUIRY MODAL
+   ============================================================ */
+
+function initInquiryModal() {
+  const modal    = document.getElementById('inquiry-modal');
+  if (!modal) return;
+
+  const closeBtn  = document.getElementById('inquiry-modal-close');
+  const form      = document.getElementById('inquiry-form');
+  const errorEl   = document.getElementById('inquiry-error');
+  const successEl = document.getElementById('inquiry-success');
+  const submitBtn = document.getElementById('inquiry-submit');
+
+  const triggers = [
+    document.getElementById('nav-inquiry-trigger'),
+    document.getElementById('mobile-inquiry-trigger'),
+  ].filter(Boolean);
+
+  function openModal() {
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    const first = modal.querySelector('input, select, textarea, button');
+    if (first) first.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  triggers.forEach(function(t) {
+    t.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  if (!form) return;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('inq-name').value.trim();
+    const contact = document.getElementById('inq-contact').value.trim();
+
+    if (!name || !contact) {
+      errorEl.textContent = 'Please enter your name and a phone number or email.';
+      errorEl.classList.add('is-visible');
+      return;
+    }
+
+    errorEl.classList.remove('is-visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      var res = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    name,
+          contact: contact,
+          service: document.getElementById('inq-service').value,
+          message: document.getElementById('inq-message').value.trim(),
+        }),
+      });
+
+      if (res.ok) {
+        form.hidden = true;
+        successEl.hidden = false;
+      } else {
+        throw new Error('server');
+      }
+    } catch (_) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Inquiry';
+      errorEl.textContent = 'Something went wrong — please call or email us directly.';
+      errorEl.classList.add('is-visible');
+    }
+  });
+}
+
+/* ============================================================
    PHOTO CAROUSEL
    ============================================================ */
 
@@ -882,6 +972,7 @@ function init() {
   initContactForm();
   initParallax();
   initPhotoCarousel();
+  initInquiryModal();
 }
 
 if (document.readyState === 'loading') {
