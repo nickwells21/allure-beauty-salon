@@ -54,8 +54,11 @@
   --radius-md:   8px;
   --radius-lg:  16px;
 
-  /* Transition */
+  /* Transition & Motion */
   --transition-base: 200ms ease;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
   /* Layout */
   --max-width: 1280px;
@@ -783,6 +786,14 @@ h4, h5, h6 {
   --btn-border-c2: hsla(15, 35%, 65%, 0.55);
   color: #FFFFFF;
   text-decoration: none;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(163, 119, 100, 0.25);
+}
+
+.btn-primary:active,
+.btn-inverted:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(163, 119, 100, 0.15);
 }
 
 .btn-primary:disabled,
@@ -911,6 +922,8 @@ h4, h5, h6 {
   --btn-border-c2: hsla(15, 35%, 70%, 0.55);
   color: #FFFFFF;
   text-decoration: none;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(163, 119, 100, 0.20);
 }
 
 @media (max-width: 767px) {
@@ -944,14 +957,15 @@ h4, h5, h6 {
   gap: var(--space-2);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: 3px solid var(--brand-brown);
+  border-left: 3px solid var(--brand-brown);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   padding: 2rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
 }
 
 .benefit-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(86, 69, 63, 0.12);
+  transform: translateY(-4px) translateX(2px);
+  box-shadow: 0 12px 40px rgba(86, 69, 63, 0.10), 0 2px 8px rgba(86, 69, 63, 0.06);
 }
 
 .benefit-card__icon {
@@ -1026,11 +1040,17 @@ h4, h5, h6 {
 
 .testimonial-card {
   background-color: var(--color-surface);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm) var(--radius-lg) var(--radius-lg) var(--radius-sm);
+  border-left: 3px solid var(--brand-pink);
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-2px);
 }
 
 .testimonial-card__avatar {
@@ -1708,8 +1728,12 @@ h4, h5, h6 {
 .form-select:focus,
 .form-textarea:focus {
   border-color: var(--brand-brown);
-  box-shadow: 0 0 0 3px rgba(163, 119, 100, 0.18);
+  box-shadow: 0 0 0 3px rgba(163, 119, 100, 0.18), inset 0 1px 2px rgba(163, 119, 100, 0.06);
   outline: none;
+  background-image: linear-gradient(var(--color-surface), var(--color-surface)), linear-gradient(135deg, var(--brand-brown), var(--brand-pink));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border-color: transparent;
 }
 
 /* Keyboard-only focus: show outline in addition to the existing border/shadow */
@@ -2959,4 +2983,79 @@ h4, h5, h6 {
     var(--hero-bg-image, linear-gradient(135deg, #E4C7B8 0%, #F1F0E5 100%));
   background-size: cover;
   background-position: center;
+}
+
+/* === SCROLL REVEAL ANIMATIONS ===
+   Applied via IntersectionObserver in app.js
+   Staggered children use --reveal-delay set inline
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal--left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal--left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal--scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal--scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Reduced motion: skip animations */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--left,
+  .reveal--scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* === SECTION ACCENT DECORATORS === */
+
+.section-accent {
+  position: relative;
+}
+
+.section-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-brown), var(--brand-pink));
+  border-radius: 2px;
 }

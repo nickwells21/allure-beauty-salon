@@ -956,6 +956,31 @@ function escapeHtml(str) {
 }
 
 /* ============================================================
+   SCROLL REVEAL — IntersectionObserver
+   ============================================================ */
+
+function initScrollReveal() {
+  if (prefersReducedMotion()) return;
+
+  const reveals = document.querySelectorAll('.reveal, .reveal--left, .reveal--scale');
+  if (!reveals.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '-40px' }
+  );
+
+  reveals.forEach((el) => observer.observe(el));
+}
+
+/* ============================================================
    INIT — RUN ON DOM READY
    ============================================================ */
 
@@ -970,6 +995,7 @@ function init() {
   initParallax();
   initPhotoCarousel();
   initInquiryModal();
+  initScrollReveal();
 }
 
 if (document.readyState === 'loading') {
