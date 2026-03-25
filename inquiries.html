@@ -267,14 +267,31 @@
     }
 
     function contactLink(contact) {
+      var safe = esc(contact);
       if (contact.includes('@')) {
-        return `<a href="mailto:${contact}">${contact}</a>`;
+        return '<a href="mailto:' + encodeURI(contact) + '">' + safe + '</a>';
       }
       if (isPhone(contact)) {
-        const digits = contact.replace(/\D/g, '');
-        return `<a href="tel:+1${digits}">${contact}</a>`;
+        var digits = contact.replace(/\D/g, '');
+        return '<a href="tel:+1' + digits + '">' + safe + '</a>';
       }
-      return contact;
+      return safe;
+    }
+
+    // Get admin key from URL query string
+    const adminKey = new URLSearchParams(window.location.search).get('key') || '';
+
+    function esc(str) {
+      const d = document.createElement('div');
+      d.appendChild(document.createTextNode(String(str)));
+      return d.innerHTML;
+    }
+
+    // Sanitize CSV cell to prevent formula injection
+    function csvSafe(val) {
+      let s = String(val || '').replace(/"/g, '""');
+      if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+      return s;
     }
 
     let allData = [];
@@ -293,53 +310,53 @@
       document.getElementById('stat-week').textContent  = data.filter(i => new Date(i.date) >= weekStart).length;
 
       if (!data.length) {
-        wrap.innerHTML = `<div class="empty-state">
-          <span class="empty-state__icon">Allure</span>
-          <p>No client inquiries yet.</p>
-          <p style="margin-top:.5rem;font-size:.75rem;">They'll appear here when clients submit the "Book a Service" form.</p>
-        </div>`;
+        wrap.innerHTML = '<div class="empty-state">' +
+          '<span class="empty-state__icon">Allure</span>' +
+          '<p>No client inquiries yet.</p>' +
+          '<p style="margin-top:.5rem;font-size:.75rem;">They\u2019ll appear here when clients submit the \u201cBook a Service\u201d form.</p>' +
+          '</div>';
         return;
       }
 
-      wrap.innerHTML = `<div class="inquiry-list">
-        ${data.map(inq => `
-          <div class="inquiry-card">
-            <div>
-              <p class="inquiry-card__name">${inq.name}</p>
-              <span class="inquiry-card__service">${inq.service}</span>
-              <p class="inquiry-card__contact">${contactLink(inq.contact)}</p>
-              ${inq.message ? `<p class="inquiry-card__message">"${inq.message}"</p>` : ''}
-            </div>
-            <div class="inquiry-card__date">${formatDate(inq.date)}</div>
-          </div>
-        `).join('')}
-      </div>`;
+      wrap.innerHTML = '<div class="inquiry-list">' +
+        data.map(function(inq) {
+          return '<div class="inquiry-card"><div>' +
+            '<p class="inquiry-card__name">' + esc(inq.name) + '</p>' +
+            '<span class="inquiry-card__service">' + esc(inq.service) + '</span>' +
+            '<p class="inquiry-card__contact">' + contactLink(inq.contact) + '</p>' +
+            (inq.message ? '<p class="inquiry-card__message">\u201c' + esc(inq.message) + '\u201d</p>' : '') +
+            '</div><div class="inquiry-card__date">' + esc(formatDate(inq.date)) + '</div></div>';
+        }).join('') +
+        '</div>';
     }
 
     function loadInquiries() {
-      document.getElementById('inquiry-list-wrap').innerHTML = '<p class="loading">Loading…</p>';
-      fetch('/api/inquiries')
-        .then(r => r.json())
+      document.getElementById('inquiry-list-wrap').innerHTML = '<p class="loading">Loading\u2026</p>';
+      fetch('/api/inquiries', { headers: { 'X-Admin-Key': adminKey } })
+        .then(function(r) {
+          if (!r.ok) throw new Error('Unauthorized');
+          return r.json();
+        })
         .then(renderInquiries)
-        .catch(() => {
+        .catch(function() {
           document.getElementById('inquiry-list-wrap').innerHTML =
-            '<p class="loading" style="color:#e53e3e;">Could not load inquiries.</p>';
+            '<p class="loading" style="color:#e53e3e;">Could not load inquiries. Check your admin key.</p>';
         });
     }
 
     document.getElementById('refresh-btn').addEventListener('click', loadInquiries);
 
-    document.getElementById('export-btn').addEventListener('click', () => {
+    document.getElementById('export-btn').addEventListener('click', function() {
       if (!allData.length) { alert('No inquiries to export.'); return; }
-      const header = 'Date,Name,Contact,Service,Message';
-      const rows = allData.map(i => [
-        i.date, i.name, i.contact, i.service,
-        (i.message || '').replace(/"/g, '""')
-      ].map(v => `"${v}"`).join(','));
-      const csv = [header, ...rows].join('\n');
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url  = URL.createObjectURL(blob);
-      const a    = Object.assign(document.createElement('a'), { href: url, download: 'allure-inquiries.csv' });
+      var header = 'Date,Name,Contact,Service,Message';
+      var rows = allData.map(function(i) {
+        return [i.date, i.name, i.contact, i.service, i.message]
+          .map(function(v) { return '"' + csvSafe(v) + '"'; }).join(',');
+      });
+      var csv = [header].concat(rows).join('\n');
+      var blob = new Blob([csv], { type: 'text/csv' });
+      var url  = URL.createObjectURL(blob);
+      var a    = Object.assign(document.createElement('a'), { href: url, download: 'allure-inquiries.csv' });
       a.click();
       URL.revokeObjectURL(url);
     });
