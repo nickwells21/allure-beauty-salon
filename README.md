@@ -14,7 +14,7 @@ Allure Beauty Salon/
 ├── index.html              # Homepage
 ├── booth-rental.html       # What's included / model explainer
 ├── apply.html              # 3-step application form (primary conversion page)
-├── about.html              # Brand story (Ruth Bindle)
+├── about.html              # Brand story (Kristi & Scott Mayer)
 ├── faq.html                # Licensing, lease, move-in FAQ
 ├── contact.html            # General inquiries (NOT appointment booking)
 ├── CONTENT_SPEC.md         # Agent A: all copy, CTAs, microcopy per page
@@ -57,7 +57,7 @@ Allure Beauty Salon/
 - All 3 testimonials on `index.html` are marked `<!-- TODO: Replace with real tenant testimonial -->`
 - Get quotes from 1–2 current or past tenants before launch
 
-**6. Write Ruth Bindle's real brand story**
+**6. Write Kristi Mayer's real brand story**
 - `about.html` has placeholder paragraphs with prompts like `[RUTH: describe your inspiration...]`
 - The About page is entirely placeholder — this directly affects trust
 
